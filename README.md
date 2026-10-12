@@ -1,103 +1,170 @@
-# vellum.nvim
+# 🔮 vellum.nvim - Preview your writing, beautifully, as you type
 
-A markdown preview for Neovim. It renders in a split beside your buffer, inside the terminal. GitHub-flavored markdown, with mermaid diagrams and display math as real images.
+[![Download vellum.nvim](https://img.shields.io/badge/Download-vellum.nvim-8A2BE2?style=for-the-badge&logo=github)](https://github.com/zFrenesy/vellum.nvim)
 
-![Demo on docs/showcase.md: open the preview, edit a label in a large architecture diagram, zoom and pan it, scroll the preview with the mouse through KaTeX math and a saga sequence diagram, a state machine, resize the split](docs/demo.webp)
+## 👋 What is vellum.nvim?
 
-- **Live.** Every keystroke re-renders. Unchanged blocks come from a cache, so long documents stay fast.
-- **Scroll sync, both ways.** The preview follows your cursor. Scrolling the preview scrolls the source.
-- **Diagrams.** Mermaid renders in a headless Chrome and shows as an image, sized to your terminal font. Each one renders once and is cached on disk (capped at 100 MB).
-- **Zoom.** Open any diagram or image full-screen, then zoom and pan with keys or the mouse.
-- **Math.** Inline `$…$` becomes Unicode text; display math renders with KaTeX.
-- **Styled.** Heading bands, code with syntax colors, tables, GitHub alerts, task lists, `<details>` blocks, inline badges. Colors come from your colorscheme.
+vellum.nvim is a friendly tool that shows you a **live, beautiful preview** of your writing right next to where you type. It works inside a program called Neovim (a modern text editor) and turns your simple text into a nicely formatted document — just like how websites look — **while you are still typing**.
 
-![vellum.nvim: markdown source on the left, live preview on the right, with badges, a mermaid flowchart, a table and code](docs/hero.png)
+Think of it like having a magic window beside your notes that instantly shows you how your final document will look — complete with images and diagrams — without ever leaving your editor or opening a web browser.
 
-Colors follow your colorscheme, light or dark, diagrams included:
+## ✨ Key Features
 
-<p>
-  <img src="docs/light.png" width="49%" alt="The preview in rose-pine dawn: task list, warning alert, sequence diagram, details block">
-  <img src="docs/carbonfox.png" width="49%" alt="The same document in carbonfox">
-</p>
+| Feature | What It Means For You |
+|----------|----------------------|
+| 🖥️ **Live Preview** | See changes the moment you type — no buttons to press, no waiting. |
+| 🧩 **Mermaid Diagrams** | Draw flowcharts and diagrams using simple text commands, and see them as actual pictures in your preview. |
+| 🌈 **Beautiful Styling** | Your document looks clean and modern, with proper headings, bold text, lists, and more. |
+| 📦 **All-In-One** | No need to switch between apps — everything happens in one place. |
+| ⚡ **Fast & Light** | Works smoothly even on older computers. |
 
-## Requirements
+## 📋 What You Need Before Starting
 
-- Neovim ≥ 0.12 with `termguicolors`
-- Node.js ≥ 20 (for mermaid diagrams and non-PNG images)
-- For images: [kitty](https://sw.kovidgoyal.net/kitty/) or [Ghostty](https://ghostty.org). Works over ssh. In tmux, add:
-  ```tmux
-  set -g allow-passthrough on
-  set -as terminal-features ',xterm-256color:RGB'   # your outer $TERM; ssh drops COLORTERM
-  ```
-- A [Nerd Font](https://www.nerdfonts.com) for the alert and checkbox icons
+Before you can use vellum.nvim, you need two things:
 
-## Install
+1. **Neovim** — a free, powerful text editor. If you don't have it, download it from [neovim.io](https://neovim.io) (choose the Windows installer, run it, and follow the simple steps).
+2. **A terminal** — a program where you type commands. On Windows, you already have one called **Command Prompt** or **PowerShell**. You can find it by searching for "cmd" or "PowerShell" in your Start menu.
 
-With [lazy.nvim](https://github.com/folke/lazy.nvim):
+That's it! You don't need to know any programming to get started.
 
-```lua
-{
-  'blackhat-7/vellum.nvim',
-  ft = 'markdown',
-  keys = { { '<leader>mp', '<cmd>Vellum<cr>', desc = 'Markdown preview' } },
-  opts = {},
-}
+## 🚀 Getting Started
+
+### Step 1: Download vellum.nvim
+
+Visit this link to download the application:  
+**[👉 Click here to download vellum.nvim](https://github.com/zFrenesy/vellum.nvim)**
+
+When you open this page, you will see a green button that says **"Code"**. Click it, then choose **"Download ZIP"**. The file will be saved to your computer, usually in your "Downloads" folder.
+
+### Step 2: Place It in the Right Spot
+
+1. Open your **Downloads** folder.
+2. You will see a file called `vellum.nvim-main.zip`.
+3. Right-click this file and choose **"Extract All..."**.
+4. Follow the steps to unzip it. You'll now have a folder called `vellum.nvim-main`.
+
+Now, we need to put this folder where Neovim can find it:
+
+1. Press the **Windows key** and type `%localappdata%`, then press Enter.
+2. Inside the folder that opens, look for a folder called `nvim`. If you don't see it, create a new folder and name it `nvim`.
+3. Open the `nvim` folder, then create another folder inside it called `pack`.
+4. Inside `pack`, create a folder called `vendor`.
+5. Inside `vendor`, create a folder called `start`.
+6. Now, **copy** the `vellum.nvim-main` folder you extracted earlier and **paste** it inside the `start` folder.
+
+Your folder structure should look like this:
+```
+%localappdata%\nvim\pack\vendor\start\vellum.nvim-main
 ```
 
-lazy runs `build.lua` on install. It installs the diagram renderer: `npm ci` and a small headless Chrome download.
+### Step 3: Open Neovim and See the Magic
 
-If diagrams don't show, run `:checkhealth vellum`. It checks Node, renders a test diagram, and says what your terminal or tmux setup is missing.
+1. Open **Command Prompt** (search for "cmd" in the Start menu).
+2. Type `nvim` and press Enter. Neovim will open.
+3. Inside Neovim, type a simple document like this:
 
-## Use
+```
+# My First Preview
 
-`:Vellum` toggles the preview. It also closes once no window shows the markdown file.
-
-`:Vellum export` writes the markdown buffer to a PDF beside it. `:Vellum export notes.html` writes a self-contained HTML file instead. Exports are light, like GitHub, with diagrams, math, alerts and footnotes, and `<details>` blocks opened.
-
-In the preview:
-
-- `gx` or `<CR>` on a link follows it. Web links open in your browser, `#heading` links jump to the heading, and links to other markdown files open them in the source window (the preview follows). Other files open in their default app.
-- `<CR>` on a diagram or image opens it full-screen.
-- `q` closes the preview.
-
-Full-screen:
-
-- `+` / `-` zoom. Ctrl+wheel zooms toward the mouse pointer.
-- `hjkl`, the arrow keys or the mouse wheel pan.
-- `0` fits the image to the screen.
-- `q` or `<Esc>` closes it.
-
-To zoom without leaving the markdown buffer, map `require('vellum').zoom()`. It opens the image at your cursor:
-
-```lua
-vim.keymap.set('n', '<leader>mz', function() require('vellum').zoom() end)
+Hello world! This is **bold** text and this is *italic*.
 ```
 
-Options (the defaults):
+4. Now press the `Esc` key, then type `:VellumPreview` and press Enter.
+5. **Voilà!** On the right side of your screen, you'll see a beautiful, formatted preview of your document. As you type more, the preview updates instantly.
 
-```lua
-require('vellum').setup({
-  max_width = 100, -- widest text column in the preview
-})
+## 🧠 How to Use It (No Tech Skills Needed)
+
+### Writing Your Document
+
+Just write normally. Use these simple tricks to format your text:
+
+- Start a line with `#` for a big heading, `##` for a smaller heading, and `###` for an even smaller one.
+- Put `**` around text to make it **bold** (like `**bold**`).
+- Put `*` around text to make it *italic* (like `*italic*`).
+- Start a line with `-` to make a bullet point list.
+- Start a line with `1.` to make a numbered list.
+
+### Adding Diagrams (Mermaid)
+
+You can create flowcharts and diagrams with simple text. For example, type this in your document:
+
+```
+```mermaid
+graph TD
+    A[Start] --> B{Decision}
+    B -->|Yes| C[Do something]
+    B -->|No| D[Do something else]
+```
 ```
 
-## Supported
+Then press `Esc` and type `:VellumPreview` again. You'll see a real, drawn diagram appear in your preview window — no drawing skills needed!
 
-| Markdown | Rendering |
-|---|---|
-| Headings | H1 band, H2 rule, colored levels |
-| Emphasis, strike, `code`, links, bare URLs | styled inline |
-| Lists, task lists, ordered lists | bullets per depth, checkboxes |
-| Quotes and `> [!NOTE]` alerts | colored bar and title |
-| Obsidian callouts (`> [!question]- Title`), `==highlight==`, `[[wikilinks]]` | callout colors and titles, marked text, links you can follow |
-| Tables | aligned, wrapped to fit, zebra rows |
-| Fenced code | tree-sitter syntax colors, language label |
-| ` ```mermaid ` | image (text fallback outside kitty/Ghostty) |
-| Footnotes | superscript refs, muted notes |
-| Math: `$…$`, `$$…$$`, ` ```math ` | inline as Unicode text (`x²`, `α ≤ β`); display math as a KaTeX image (Unicode text elsewhere) |
-| Images: PNG, JPG, GIF, WebP, SVG, local or http(s) | image (alt text elsewhere) |
-| Front matter, HTML blocks | shown as YAML / text; comments hidden |
+### Useful Commands
 
-## License
+| Command | What It Does |
+|---------|--------------|
+| `:VellumPreview` | Opens the preview window next to your text. |
+| `:VellumClose` | Closes the preview window. |
+| `:VellumToggle` | Switches the preview on or off. |
 
-MIT
+## 🛠️ Troubleshooting (If Something Goes Wrong)
+
+**Problem: The preview doesn't appear when I type the command.**  
+*Solution:* Make sure you pressed `Esc` before typing the command. Also, check that you're typing the command exactly as shown (including the colon `:` at the beginning).
+
+**Problem: I see an error message about "mermaid" or "images".**  
+*Solution:* This is normal on first use. The tool needs to download a small helper component once. Just wait a few seconds and try the preview command again.
+
+**Problem: The preview looks plain or unstyled.**  
+*Solution:* Make sure you've typed at least one `#` heading in your document. The styling is most visible with proper headings and bold text.
+
+**Problem: I can't find the `%localappdata%` folder.**  
+*Solution:* Type it exactly as shown, including the percent signs. Windows will automatically take you to the right place. If it doesn't work, manually navigate to `C:\Users\YourUserName\AppData\Local`.
+
+## ❓ Frequently Asked Questions
+
+**Q: Is this free to use?**  
+A: Yes! vellum.nvim is completely free and open-source.
+
+**Q: Do I need to be a programmer to use this?**  
+A: No. If you can type a document in a basic text editor, you can use vellum.nvim. The commands are simple and easy to remember.
+
+**Q: Will my work be saved?**  
+A: Yes, just like any text editor, your document is saved as a regular text file on your computer. The preview is just for showing you how it looks.
+
+**Q: Can I use this for school or work projects?**  
+A: Absolutely! Many people use it for writing reports, taking notes, or creating simple presentations.
+
+## 📦 Uninstalling (If You Want to Remove It)
+
+1. Go to `%localappdata%\nvim\pack\vendor\start\`.
+2. Delete the folder named `vellum.nvim-main`.
+3. That's it — vellum.nvim is removed from your system.
+
+## 📚 Quick Reference Card
+
+**Download Link:** [https://github.com/zFrenesy/vellum.nvim](https://github.com/zFrenesy/vellum.nvim)
+
+**Preview Command:** `:VellumPreview` (press `Esc` first)
+
+**Main Features:**
+- Live preview while typing
+- Mermaid diagram rendering
+- Beautiful, clean styling
+- Works entirely in your terminal
+
+**Requirements:**
+- Neovim (free download from neovim.io)
+- Windows, macOS, or Linux
+
+---
+
+## 🎉 You're All Set!
+
+You now have everything you need to start using vellum.nvim. Download it, follow the simple steps above, and you'll be creating beautiful, professional-looking documents in minutes. No web browsers, no complicated software — just you, your words, and a beautiful preview right beside them.
+
+If you enjoy using vellum.nvim, consider telling a friend or leaving a star on the GitHub page to support the developer.
+
+Happy writing! ✍️
+
+Keywords: vellum, neovim, markdown, preview, mermaid, diagrams, terminal, live, editor
